@@ -1,0 +1,56 @@
+@startuml
+skinparam shadowing false
+left to right direction
+
+actor Administrator as admin
+
+rectangle Travel_agance{
+    usecase "Adding" as add
+    usecase "Editing" as edit
+    usecase "Deleting" as delete
+    usecase "Viewing" as view
+    admin --> add
+    admin --> edit
+    admin --> delete
+    admin --> view
+
+    usecase "Info about offices" as office
+    usecase "Info about tours" as tour
+    usecase "Info about places" as place
+
+    add ..> office: <<extend>>
+    add ..> tour: <<extend>>
+    add ..> place: <<extend>>
+
+    edit ..> office: <<extend>>
+    edit ..> tour: <<extend>>
+    edit ..> place: <<extend>>
+
+    delete ..> office: <<extend>>
+    delete ..> tour: <<extend>>
+    delete ..> place: <<extend>>
+
+    usecase "Full info about certain tour" as cur_tour
+    usecase "List of five-star hotel" as hotel
+    usecase "Prace list" as prace
+
+    view ..> cur_tour: <<extend>>
+    view ..> hotel: <<extend>>
+    view ..> prace: <<extend>>
+
+    usecase "Name of travel agance" as agance
+    usecase "Adress of agance" as adress
+    usecase "Phone number" as number
+    usecase "Data" as data
+    usecase "Name of the contact person" as name
+    usecase "List of available tours" as list_t
+
+    prace ..> agance: <<inclide>>
+    prace ..> adress: <<inclide>>
+    prace ..> number: <<inclide>>
+    prace ..> data: <<inclide>>
+    prace ..> name: <<inclide>>
+    prace ..> list_t: <<inclide>>
+}
+
+@enduml
