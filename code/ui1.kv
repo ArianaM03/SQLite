@@ -1,0 +1,881 @@
+<MenuScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        Button:
+            text:'Администратор'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'admin'
+
+        Button:
+            text:'Пользователь'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'user'
+
+
+<AdminScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 30
+        spacing: 20
+        Button:
+            text:'Информация об офисах'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'office'
+        Button:
+            text:'Информация о турах'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'tour'
+        Button:
+            text:'Информация об отелях'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'hotel'
+        Button:
+            text: 'Back to menu'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
+
+<OfficeScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'admin'
+            size_hint: .1,1
+        BoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    id:id_idd_label
+                    text: 'id'
+                    color: 0,0,0,1
+                Label:
+                    id:id_name_label
+                    text: 'Название офиса'
+                    color: 0,0,0,1
+                Label:
+                    id:id_address_label
+                    text: 'Адрес'
+                    color: 0,0,0,1
+                Label:
+                    id:id_phone_label
+                    text: 'Телефон'
+                    color: 0,0,0,1
+                Label:
+                    id:id_person_label
+                    text: 'ФИО'
+                    color: 0,0,0,1
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1,.1
+                Button:
+                    text:'Обновить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.show_off()
+                Button:
+                    text:'Добавить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'addoffice'
+                Button:
+                    text:'Изменить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'updoffice'
+                Button:
+                    text:'Удалить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'deloffice'
+
+<AddOfficeScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_color: .36, .47, .83, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'office'
+            size_hint: .1,1
+        BoxLayout:
+            padding:50
+            spacing:20
+            orientation: 'vertical'
+            TextInput:
+                id:idd
+                hint_text:'id'
+            TextInput:
+                id:name_of_office
+                hint_text:'Название офиса'
+            TextInput:
+                id:address
+                hint_text:'Адрес'
+            TextInput:
+                id:phone
+                hint_text:'Телефон'
+            TextInput:
+                id:person
+                hint_text:'ФИО'
+            Button:
+                on_press: root.add_of(idd.text,name_of_office.text,address.text,phone.text,person.text)
+                text: 'Добавить'
+                background_color: .36, .47, .83, 1
+
+<DelOfficeScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_color: .36, .47, .83, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'office'
+            size_hint: .1,1
+        BoxLayout:
+            padding:50
+            spacing:20
+            orientation: 'vertical'
+            TextInput:
+                id:idd
+                hint_text:'id'
+            Button:
+                on_press: root.del_of(0, idd.text)
+                text: 'Удалить по id'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:name_of_office
+                hint_text:'Название офиса'
+            Button:
+                on_press: root.del_of(1,name_of_office.text)
+                text: 'Удалить по названию офиса'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+
+            TextInput:
+                id:address
+                hint_text:'Адрес'
+            Button:
+                on_press: root.del_of(2,address.text)
+                text: 'Удалить по адресу'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+
+            TextInput:
+                id:phone
+                hint_text:'Телефон'
+            Button:
+                on_press: root.del_of(3,phone.text)
+                text: 'Удалить по номеру телефона'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+
+            TextInput:
+                id:person
+                hint_text:'ФИО'
+            Button:
+                on_press: root.del_of(4,person.text)
+                text: 'Удалить по ФИО сотрудника'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+
+<UpdateOfficeScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_color: .36, .47, .83, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'office'
+            size_hint: .1,1
+        BoxLayout:
+            padding:50
+            spacing:20
+            orientation: 'vertical'
+            TextInput:
+                id:idd
+                hint_text:'id'
+            TextInput:
+                id:name_of_office
+                hint_text:'Название офиса'
+            Button:
+                on_press: root.upd_of(idd.text,1,name_of_office.text)
+                text: 'Редактировать название офиса'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:address
+                hint_text:'Адрес'
+            Button:
+                on_press: root.upd_of(idd.text,2,address.text)
+                text: 'Редактировать адрес'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:phone
+                hint_text:'Телефон'
+            Button:
+                on_press: root.upd_of(idd.text,3,phone.text)
+                text: 'Редактировать номер телефона'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:person
+                hint_text:'ФИО'
+            Button:
+                on_press: root.upd_of(idd.text,4,person.text)
+                text: 'Редактировать ФИО сотрудника'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+
+<TourScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'admin'
+            size_hint: .03,1
+        BoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    id:id_id_label
+                    text: 'id'
+                    color: 0,0,0,1
+                    size_hint_x: .3
+                Label:
+                    id:id_office_label
+                    text: 'Название офиса'
+                    color: 0,0,0,1
+                Label:
+                    id:id_tour_label
+                    text: 'Название тура'
+                    color: 0,0,0,1
+                Label:
+                    id:id_type_label
+                    text: 'Тип'
+                    color: 0,0,0,1
+                Label:
+                    id:id_dates_label
+                    text: 'Даты'
+                    color: 0,0,0,1
+                Label:
+                    id:id_days_label
+                    text: 'Продолжительность'
+                    color: 0,0,0,1
+
+                Label:
+                    id:id_transport_label
+                    text: 'Тип транспорта'
+                    color: 0,0,0,1
+                Label:
+                    id:id_point_label
+                    text: 'Точка отправления'
+                    color: 0,0,0,1
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1,.1
+                Button:
+                    text:'Обновить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.show_tour()
+                Button:
+                    text:'Добавить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'addtour'
+                Button:
+                    text:'Изменить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'updtour'
+                Button:
+                    text:'Удалить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'deltour'
+
+<AddTourScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_color: .36, .47, .83, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tour'
+            size_hint: .1,1
+        BoxLayout:
+            padding:50
+            spacing:20
+            orientation: 'vertical'
+            TextInput:
+                id: id
+                hint_text: 'id'
+            TextInput:
+                id: name_of_office
+                hint_text: 'Название офиса'
+            TextInput:
+                id: name_of_tour
+                hint_text: 'Название тура'
+            TextInput:
+                id: type
+                hint_text: 'Тип'
+            TextInput:
+                id: dates
+                hint_text: 'Даты в формате 01.01.2022 - 02.01.2022'
+            TextInput:
+                id: duration_days
+                hint_text: 'Продолжительность'
+            TextInput:
+                id: type_of_tr
+                hint_text: 'Тип транспорта'
+            TextInput:
+                id: point_of_dep
+                hint_text: 'Точка отправления'
+            Button:
+                on_press:
+                    root.addTour(id.text, name_of_office.text, name_of_tour.text, type.text, dates.text, duration_days.text, type_of_tr.text, point_of_dep.text)
+                text: 'Добавить'
+                background_color: .36, .47, .83, 1
+
+<DeleteTourScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_color: .36, .47, .83, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tour'
+            size_hint: .1,1
+        BoxLayout:
+            padding:50
+            spacing:20
+            orientation: 'vertical'
+            TextInput:
+                id:id
+                hint_text:'id'
+            Button:
+                on_press: root.delTour(0, id.text)
+                text: 'Удалить по id'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:name_of_tour
+                hint_text:'Название тура'
+            Button:
+                on_press: root.delTour(2,name_of_tour.text)
+                text: 'Удалить по названию тура'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+
+<UpdateTourScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_color: .36, .47, .83, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tour'
+            size_hint: .1,1
+        BoxLayout:
+            padding:50
+            spacing:20
+            orientation: 'vertical'
+            TextInput:
+                id:id
+                hint_text:'id'
+            TextInput:
+                id:name_of_office
+                hint_text:'Название офиса'
+            Button:
+                on_press: root.updTour(id.text,1,name_of_office.text)
+                text: 'Редактировать название офиса'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:name_of_tour
+                hint_text:'Название тура'
+            Button:
+                on_press: root.updTour(id.text,2,name_of_tour.text)
+                text: 'Редактировать название тура'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:type
+                hint_text:'Название типа'
+            Button:
+                on_press: root.updTour(id.text,3,type.text)
+                text: 'Редактировать тип'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id: dates
+                hint_text: 'Даты в формате 01.01.2022 - 02.01.2022'
+            Button:
+                on_press: root.updTour(id.text,4,dates.text)
+                text: 'Редактировать тип'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:duration_days
+                hint_text:'продолжительность'
+            Button:
+                on_press: root.updTour(id.text,5,duration_days.text)
+                text: 'Редактировать продолжительность'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:type_of_tr
+                hint_text:'Тип транспорта'
+            Button:
+                on_press: root.updTour(id.text,6,type_of_tr.text)
+                text: 'Редактировать Тип транспорта'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:point_of_dep
+                hint_text:'Точка отправления'
+            Button:
+                on_press: root.updTour(id.text,7,point_of_dep.text)
+                text: 'Редактировать точку отправления'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+
+<HotelScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'admin'
+            size_hint: .1,1
+        BoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    id:id_id_label
+                    text: 'id'
+                    color: 0,0,0,1
+                Label:
+                    id:id_locality_label
+                    text: 'Название города'
+                    color: 0,0,0,1
+                Label:
+                    id:id_hotel_name_label
+                    text: 'Название отеля'
+                    color: 0,0,0,1
+                Label:
+                    id:id_stars_label
+                    text: 'Количество звезд'
+                    color: 0,0,0,1
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1,.1
+                Button:
+                    text:'Обновить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.show_hotel()
+                Button:
+                    text:'Добавить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'addhotel'
+                Button:
+                    text:'Изменить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'updhotel'
+                Button:
+                    text:'Удалить'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    on_press:
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'delhotel'
+
+<AddHotelScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_color: .36, .47, .83, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'hotel'
+            size_hint: .1,1
+        BoxLayout:
+            padding:50
+            spacing:20
+            orientation: 'vertical'
+            TextInput:
+                id: id
+                hint_text: 'id'
+            TextInput:
+                id: locality
+                hint_text: 'Название города'
+            TextInput:
+                id: hotel_name
+                hint_text: 'Название отеля'
+            TextInput:
+                id: amount_of_stars
+                hint_text: 'Количество звезд'
+            Button:
+                on_press:
+                    root.add_hotel(id.text, locality.text, hotel_name.text, amount_of_stars.text)
+                text: 'Добавить'
+                background_color: .36, .47, .83, 1
+
+<UpdHotelScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_color: .36, .47, .83, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'hotel'
+            size_hint: .1,1
+        BoxLayout:
+            padding:50
+            spacing:20
+            orientation: 'vertical'
+            TextInput:
+                id:id
+                hint_text:'id'
+            TextInput:
+                id:locality
+                hint_text:'Название города'
+            Button:
+                on_press: root.upd_hotel(id.text,1,locality.text)
+                text: 'Редактировать название города'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:hotel_name
+                hint_text:'Название отеля'
+            Button:
+                on_press: root.upd_hotel(id.text,2,hotel_name.text)
+                text: 'Редактировать название отеля'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:amount_of_stars
+                hint_text:'Количество звезд'
+            Button:
+                on_press: root.upd_hotel(id.text,3,amount_of_stars.text)
+                text: 'Редактировать количество звезд'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+
+<DelHotelScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_color: .36, .47, .83, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'hotel'
+            size_hint: .1,1
+        BoxLayout:
+            padding:50
+            spacing:20
+            orientation: 'vertical'
+            TextInput:
+                id:id
+                hint_text:'id'
+            Button:
+                on_press: root.del_hotel(0, id.text)
+                text: 'Удалить по id'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+            TextInput:
+                id:hotel_name
+                hint_text:'Название отеля'
+            Button:
+                on_press: root.del_hotel(2,hotel_name.text)
+                text: 'Удалить по названию отеля'
+                background_color: .36, .47, .83, 1
+                size_hint: 1,.1
+
+<UserScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 30
+        spacing: 20
+        Button:
+            text:'Просмотр полной инфы о заданном туре'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'infotour'
+        Button:
+            text:'Информация о всех пятизвездочных отелях'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'star'
+        Button:
+            text:'Просмотр прайс листа'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'list'
+        Button:
+            text: 'Back to menu'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
+
+<InfAboutTourScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'user'
+            size_hint: .01,1
+        BoxLayout:
+            BoxLayout:
+                orientation: 'vertical'
+                TextInput:
+                    id:key
+                    hint_text:'id'
+                    size_hint: 1,.1
+                Button:
+                    text:'Найти'
+                    background_normal: ''
+                    background_color: .36, .47, .83, 1
+                    color: 0,0,0,1
+                    size_hint: 1,.1
+                    on_press: root.show_info(key.text)
+                BoxLayout:
+                    orientation: 'horizontal'
+                    Label:
+                        id: id_id_label
+                        text: 'id'
+                        color: 0,0,0,1
+                        size_hint_x: .2
+                    Label:
+                        id: id_office_label
+                        text: 'Название офиса'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_tour_label
+                        text: 'Название тура'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_type_label
+                        text: 'Тип'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_dates_label
+                        text: 'Даты'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_days_label
+                        text: 'Продолжительность'
+                        color: 0,0,0,1
+                BoxLayout:
+                    orientation: 'horizontal'
+                    Label:
+                        id:id_locality_label
+                        text: 'Место расположение'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_hotel_label
+                        text: 'Отель'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_stars_label
+                        text: 'Количество звезд'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_price_label
+                        text: 'Стоимость'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_transport_label
+                        text: 'Тип транспорта'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_point_label
+                        text: 'Точка отправления'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_address_label
+                        text: 'Адрес офиса'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_phone_label
+                        text: 'Телефон'
+                        color: 0,0,0,1
+                    Label:
+                        id:id_person_label
+                        text: 'ФИО'
+                        color: 0,0,0,1
+
+<InfStarsScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'user'
+            size_hint: .1,1
+        BoxLayout:
+            Button:
+                text:'Показать'
+                background_normal: ''
+                background_color: .36, .47, .83, 1
+                color: 0,0,0,1
+                size_hint: 1,1
+                on_press: root.show_info()
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    id: id_hotel_label
+                    text: 'название отеля'
+                    color: 0,0,0,1
+
+<PriceListScreen>:
+    BoxLayout:
+        Button:
+            text: 'Назад'
+            background_normal: ''
+            background_color: .36, .47, .83, 1
+            color: 0,0,0,1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'user'
+            size_hint: .05,1
+        BoxLayout:
+            orientation: 'vertical'
+            TextInput:
+                id:key
+                hint_text:'Введите дату в формате 00.00.0000 - 00.00.0000'
+                size_hint: 1,.1
+            Button:
+                text:'Найти'
+                background_normal: ''
+                background_color: .36, .47, .83, 1
+                color: 0,0,0,1
+                size_hint: 1,.1
+                on_press: root.show_info(key.text)
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    id:id_dates_label
+                    text: 'Даты'
+                    color: 0,0,0,1
+                Label:
+                    id:id_name_label
+                    text: 'Название офиса'
+                    color: 0,0,0,1
+                Label:
+                    id:id_price_label
+                    text: 'Цена'
+                    color: 0,0,0,1
+                Label:
+                    id:id_address_label
+                    text: 'Адрес'
+                    color: 0,0,0,1
+                Label:
+                    id:id_phone_label
+                    text: 'Телефон'
+                    color: 0,0,0,1
+                Label:
+                    id:id_person_label
+                    text: 'ФИО'
+                    color: 0,0,0,1
+                Label:
+                    id:id_tour_label
+                    text: 'Название тура'
+                    color: 0,0,0,1
